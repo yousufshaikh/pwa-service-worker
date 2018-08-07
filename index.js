@@ -13,3 +13,23 @@ if ('serviceWorker' in navigator) {
 
 // Register service worker in index.js end
 
+// fetching info from github API start
+
+function getDate() {
+  console.log("testing");
+  fetch("https://api.github.com/users/octocat/followers")
+  .then(function(response){
+    return response.json()
+  })
+  .then(function(followers){
+    console.log(followers);
+  })
+  .catch(function(error){
+    console.log("Not Working");
+  })
+}
+
+// fetching info from github API end
+
+
+
