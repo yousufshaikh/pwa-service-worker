@@ -1,4 +1,6 @@
-var cacheName = 'shell-content-04';
+var cacheName = 'shell-content-04';  // cacher name
+
+// files to be cached
 var filesToCache = [
  '/index.html',
  '/style.css',
@@ -7,6 +9,7 @@ var filesToCache = [
   '/',
 ];
 
+// install service worker
 self.addEventListener('install', function(e) {
     console.log('[ServiceWorker] Install');
     e.waitUntil(
@@ -17,6 +20,7 @@ self.addEventListener('install', function(e) {
   );
 });
 
+// active service worker
 self.addEventListener('activate', function(e) {
   console.log('[ServiceWorker] Activate');
   e.waitUntil(
@@ -32,6 +36,7 @@ self.addEventListener('activate', function(e) {
   return self.clients.claim();
 });
 
+// fetch service worker
 self.addEventListener('fetch', function(e) {
   console.log('[ServiceWorker] Fetch', e.request.url);
   e.respondWith(

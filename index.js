@@ -1,3 +1,5 @@
+// Register service worker in index.js start
+
 console.log('Index.js running');
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').then(function(registration) {
@@ -8,4 +10,6 @@ if ('serviceWorker' in navigator) {
       console.log('ServiceWorker registration failed: ', err);
     });
   }
+
+// Register service worker in index.js end
 
