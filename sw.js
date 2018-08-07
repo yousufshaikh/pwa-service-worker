@@ -1,4 +1,5 @@
-var cacheName = 'shell-content-04';  // cacher name
+var cacheName = 'shell-content-04';  // cache name static
+var dynmCacheName = 'dcn-01'; // Dynamic cache name
 
 // files to be cached
 var filesToCache = [
@@ -36,12 +37,25 @@ self.addEventListener('activate', function(e) {
   return self.clients.claim();
 });
 
-// fetch service worker
+// fetch service worker static
+// self.addEventListener('fetch', function(e) {
+//   console.log('[ServiceWorker] Fetch', e.request.url);
+//   e.respondWith(
+//     caches.match(e.request).then(function(response) {
+//       return response || fetch(e.request);
+//     })
+//   );
+// });
+
+// fetch ServiceWorker dynamic
+
 self.addEventListener('fetch', function(e) {
-  console.log('[ServiceWorker] Fetch', e.request.url);
   e.respondWith(
-    caches.match(e.request).then(function(response) {
-      return response || fetch(e.request);
+    caches.open(dynmCacheName).then(function(cache) {
+      return fetch(e.request).then(function(response) {
+        cache.put(e.request, response.clone());
+        return response;
+      });
     })
   );
 });
